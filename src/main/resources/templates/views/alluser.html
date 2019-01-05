@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1" />
+	<link rel="icon" th:href="@{/images/mosico2.ico}" type="image/x-icon" />
+	<title th:text="#{login.title}"></title>
+	<span th:insert="/commons/commonResources :: common-meta"></span>
+	<span th:insert="/commons/commonResources :: common-css"></span>
+	<link rel="stylesheet" href="/css/alertify.core.css" />
+	<link rel="stylesheet" href="/css/alertify.default.css"/>
+	<style>
+		.loading-image {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			z-index: 10;
+		}
+	
+		.loader {
+			display: none;
+			width: 200px;
+			height: 200px;
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			text-align: center;
+			margin-left: -50px;
+			margin-top: -100px;
+			z-index: 2;
+			overflow: auto;
+		}	
+		.short {
+			font-weight: bold;
+			color: #FF0000;
+			font-size: larger;
+		}
+		
+		.weak {
+			font-weight: bold;
+			color: orange;
+			font-size: larger;
+		}
+		
+		.good {
+			font-weight: bold;
+			color: #2D98F3;
+			font-size: larger;
+		}
+		
+		.strong {
+			font-weight: bold;
+			color: limegreen;
+			font-size: larger;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrapper">
+		<!-- Navigation -->
+		<span th:include="/commons/navbar :: #commonnav"></span>
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header" th:text="#{user.title.userinfo}"></h1>
+				</div>
+			</div>
+			<div class="row">
+				<form id="form1" runat="server">
+					<div style="border: 1px solid black; padding: 10px">
+						<table id="datatable" width="100%" class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>firstName</th>
+									<th>lastName</th>
+									<th>fathersName</th>
+									<th>phone</th>
+									<th>password</th>
+									<th>currentAddress</th>
+									<th>permanentAddress</th>
+									<th>status</th>
+									<th>securityQuestion</th>
+									<th>securityAns</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tfoot>
+									<tr>
+									<th>firstName</th>
+									<th>lastName</th>
+									<th>fathersName</th>
+									<th>phone</th>
+									<th>password</th>
+									<th>currentAddress</th>
+									<th>permanentAddress</th>
+									<th>status</th>
+									<th>securityQuestion</th>
+									<th>securityAns</th>
+									<th>Action</th>
+								</tr>
+							</tfoot>
+							
+						</table>
+					</div>
+				</form>
+				<!-- Edit Modal -->
+				<div class="modal fade" id = "editmodel" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<div>
+									<h2 class="modal-title text-center" style="color : #337ab7;" th:text="#{user.label.modify}"></h2>
+								</div>
+							</div>
+							<div class="modal-body" id="edit-item">
+								<form class="form-horizontal" id="userForm" role="form" autocomplete="off" action="/user">
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="securityAns" ></label>
+										<div class="col-md-6">
+											<input id="userId" name="userId" class="form-control" type="hidden"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="firstName" th:text="#{user.label.firstname}"></label>
+										<div class="col-md-6">
+											<input id="firstName" name="firstName" class="form-control" type="text" th:placeholder="#{signup.placeholder.firstname}"/>
+											<span class='msg firstNamemsg' th:text="#{user.invalid.msg.firstname}" style="display: none"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="lastName" th:text="#{user.label.lastname}"></label>
+										<div class="col-md-6">
+											<input id="lastName" name="lastName" class="form-control" type="text" th:placeholder="#{signup.placeholder.lastname}"/>
+											<span class='msg lastNamemsg' th:text="#{user.label.firstname}" style="display: none"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="fathersName" th:text="#{user.label.fathersname}"></label>
+										<div class="col-md-6">
+											<input id="fathersName" name="fathersName" class="form-control" type="text" th:placeholder="#{signup.placeholder.fathersname}"/>
+											<span class='msg fatherNamemsg' th:text="#{user.invalid.msg.fathersname}" style="display: none"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="phone" th:text="#{user.label.phone}"></label>
+										<div class="col-md-6">
+											<input id="phone" name="phone" class="form-control" type="number" th:placeholder="#{signup.placeholder.phone}"/>
+											<span class='msg phonemsg' th:text="#{user.invalid.msg.phone}" style="display: none"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="password" th:text="#{user.label.password}"></label>
+										<div class="col-md-6">
+											<input id="password" name="password" class="form-control" type="password" th:placeholder="#{signup.placeholder.password}" autocomplete="off">
+											<span id="pwd_strength" class='msg'></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="password" th:text="#{user.label.confirmpassword}"></label>
+										<div class="col-md-6">
+											<input id="confirm_password" name="password" class="form-control" type="password" th:placeholder="#{signup.placeholder.confirmPassword}" autocomplete="off"/>
+											<span id='message' runat="server" ></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="currentAddress" th:text="#{user.label.currentAddress}"></label>
+										<div class="col-md-6">
+											<input id="currentAddress" name="currentAddress" class="form-control" type="text" th:placeholder="#{signup.placeholder.currentAddress}"/>
+											<span class='msg currentAddressmsg' th:text="#{user.invalid.msg.currentAddress}" style="display: none"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="permanentAddress" th:text="#{user.label.permanentAddress}"></label>
+										<div class="col-md-6">
+											<input id="permanentAddress" name="permanentAddress" class="form-control" type="text" th:placeholder="#{signup.placeholder.permanentAddress}"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="status" th:text="#{user.label.status}"></label>
+										<div class="col-md-6">
+											<select class="form-control" id="status">
+												<option class="hidden"  selected disabled><span th:text="#{user.select.choose}"></span></option>
+												<option th:value="#{user.select.active}"><span th:text="#{user.select.active}"></span></option>
+												<option th:value="#{user.select.inactive}"><span th:text="#{user.select.inactive}"></span></option>
+											</select>
+											<span class='msg status' th:text="#{user.label.firstname}" style="display: none"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="securityQuestion" th:text="#{user.label.securityQuestion}"></label>
+										<div class="col-md-6">
+											<select class="form-control" id="securityQuestion">
+												<option class="hidden"  selected disabled><span th:text="#{signup.placeholder.securityQus}"></span></option>
+												<option th:value="#{signup.option.securityQus1}"><span th:text="#{signup.option.securityQus1}"></span></option>
+												<option th:value="#{signup.option.securityQus2}"><span th:text="#{signup.option.securityQus2}"></span></option>
+												<option th:value="#{signup.option.securityQus3}"><span th:text="#{signup.option.securityQus3}"></span></option>
+												<option th:value="#{signup.option.securityQus4}"><span th:text="#{signup.option.securityQus4}"></span></option>
+												<option th:value="#{signup.option.securityQus5}"><span th:text="#{signup.option.securityQus5}"></span></option>
+												<option th:value="#{signup.option.securityQus6}"><span th:text="#{signup.option.securityQus6}"></span></option>
+											</select>
+											<span class='msg securityQuestionmsg' th:text="#{user.invalid.msg.securityQues}" style="display: none"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="securityAns" th:text="#{user.label.securityAns}"></label>
+										<div class="col-md-6">
+											<input id="securityAns" name="securityAns" class="form-control" type="text" th:placeholder="#{signup.placeholder.securityAns}"/>
+											<span class='msg securityAnsnmsg' th:text="#{user.invalid.msg.securityAns}" style="display: none"></span>
+										</div>
+									</div>
+								
+								</form>
+							</div>
+							<div class="modal-footer">
+								<input type="submit" class="btn btn-primary updatebtn"  th:value="#{user.btn.update}"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="loader">
+					<center>
+						<img class="loading-image" src="/images/lg.triple-gears-loading-icon.gif" alt="loading..">
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<span th:insert="/commons/commonResources :: common-js"></span>
+	<script src="/js/alertify.min.js"></script>
+	<script src="/customJS/user.js" th:src="@{/customJS/user.js}"></script>
+</body>
+</html>

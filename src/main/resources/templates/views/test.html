@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Test title</title>
+<link rel="icon" href="/images/mosico2.ico" type="image/x-icon"/>
+
+<span th:substituteby="/commons/commonResources :: common-css"></span>
+<link rel="stylesheet" type="text/css" href="/css/common.css" th:href="@{/css/common.css}"/>
+<body>
+
+<h1 th:text="#{greeting}"></h1>
+
+<h1><spring:message code="greeting" text="default"/></h1>
+
+<span th:text="#{lang.change}"></span>:
+<select id="locales">
+    <option value=""></option>
+    <option value="en" th:text="#{lang.eng}"></option>
+    <option value="fr" th:text="#{lang.fr}"></option>
+    <option value="bn" th:text="#{lang.bn}"></option>
+</select>
+
+<span class="fa-stack fa-2x has-badge" data-count="2">
+  <i class="fa fa-circle fa-stack-2x"></i>
+  <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
+</span>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+/* <span th:substituteby="/commons/commonResources :: common-js"></span> */
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#locales").change(function () {
+        var selectedOption = $('#locales').val();
+        if (selectedOption != ''){
+            window.location.replace('?lang=' + selectedOption);
+        }
+    });
+});
+</script>
+</body>
+</html>

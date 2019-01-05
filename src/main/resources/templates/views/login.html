@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1" />
+	<link rel="icon" th:href="@{/images/mosico2.ico}" type="image/x-icon" />
+	<title th:text="#{login.title}"></title>
+	<span th:insert="/commons/commonResources :: common-meta"></span>
+	<span th:insert="/commons/commonResources :: common-css"></span>
+	<link rel="stylesheet" type="text/css" href="/css/login.css" th:href="@{/css/login.css}" />
+</head>
+<body>
+	<div class="wrapper fadeInDown">
+		<div id="formContent">
+			<div class="fadeIn first">
+				<img th:src="@{/images/mosque_PNG54.png}" id="icon" alt="User Icon" />
+				<h1 th:text="#{login.title}"></h1>
+			</div>
+			<!-- Login Form -->
+			<form>
+				<input type="text" id="login" class="fadeIn second" name="login" th:placeholder="#{login.placeholder.phone}"/> 
+				<input type="text" id="password" class="fadeIn third" name="login" th:placeholder="#{login.placeholder.Password}"/> 
+				<input type="submit" class="fadeIn fourth" th:value="#{login.btn.label}">
+			</form>
+			<!-- Remind Passowrd -->
+			<div id="formFooter">
+				<span th:text="#{login.needAccount}"></span>
+				<a class="underlineHover" th:href="@{/pages/signup}"><span th:text="#{login.signup}"></span></a>
+			</div>
+		</div>
+	</div>
+	<span th:insert="/commons/commonResources :: common-js"></span>
+</body>
+</html>

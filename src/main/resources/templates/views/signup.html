@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1"/>
+	<link rel="icon" th:href="@{/images/mosico2.ico}" type="image/x-icon" />
+	<title th:text="#{signup.title}"></title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap4.1.1.min.css" th:href="@{/css/bootstrap4.1.1.min.css}" />
+	<link rel="stylesheet" type="text/css" href="/css/signup.css" th:href="@{/css/signup.css}" />
+</head>
+<body>
+	<div class="container register">
+		<div class="row">
+			<div class="col-md-3 register-left">
+				<img th:src="@{/images/logo_white.png}" alt=""/>
+				<h3 th:text="#{signup.title}"></h3>
+				<p th:text="#{signup.welcome.msg}"></p>
+				<button> <a class="underlineHover" th:href="@{/pages/login}"><span th:text="#{login.btn.label}"></span></a> </button><br/>
+			</div>
+			<div class="col-md-9 register-right">
+				<ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><span th:text="#{signup.tab.label.user}"></span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><span th:text="#{signup.tab.label.society}"></span></a>
+					</li>
+				</ul>
+				<div class="tab-content" id="myTabContent">
+					<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+						<h3 class="register-heading" th:text="#{signup.apply.user.label}"></h3>
+						<form class="row register-form">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" class="form-control" th:placeholder="#{signup.placeholder.firstname}" value="" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" th:placeholder="#{signup.placeholder.fathersname}" value="" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" th:placeholder="#{signup.placeholder.currentAddress}" value="" />
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" th:placeholder="#{signup.placeholder.password}" value="" />
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control"  th:placeholder="#{signup.placeholder.confirmPassword}" value="" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text"  name="txtEmpPhone" class="form-control" th:placeholder="#{signup.placeholder.lastname}" value="" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" minlength="11" maxlength="11" th:placeholder="#{signup.placeholder.phone}" value="" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" th:placeholder="#{signup.placeholder.permanentAddress}" value="" />
+								</div>
+								<div class="form-group">
+									<select class="form-control">
+										<option class="hidden"  selected disabled><span th:text="#{signup.placeholder.securityQus}"></span></option>
+										<option th:value="#{signup.option.securityQus1}"><span th:text="#{signup.option.securityQus1}"></span></option>
+										<option th:value="#{signup.option.securityQus2}"><span th:text="#{signup.option.securityQus2}"></span></option>
+										<option th:value="#{signup.option.securityQus3}"><span th:text="#{signup.option.securityQus3}"></span></option>
+										<option th:value="#{signup.option.securityQus4}"><span th:text="#{signup.option.securityQus4}"></span></option>
+										<option th:value="#{signup.option.securityQus5}"><span th:text="#{signup.option.securityQus5}"></span></option>
+										<option th:value="#{signup.option.securityQus6}"><span th:text="#{signup.option.securityQus6}"></span></option>
+									</select>
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" th:placeholder="#{signup.placeholder.securityAns}" value="" />
+								</div>
+								<input type="submit" class="btnRegister"  th:value="#{signup.btn.register.label}"/>
+							</div>
+						</form>
+					</div>
+					<div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+						<h3  class="register-heading" th:text="#{signup.apply.society.member.label}"></h3>
+						<form class="row register-form">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" class="form-control" th:placeholder="#{signup.placeholder.firstname}" value="" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" th:placeholder="#{signup.placeholder.fathersname}" value="" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control"  th:placeholder="#{signup.placeholder.currentAddress}" value="" />
+								</div>
+								<div class="form-group">
+									<input type="text"  class="form-control" th:placeholder="#{signup.placeholder.mainEarningPerson}" value="" />
+								</div>
+								<div class="form-group">
+									<input type="text"  class="form-control" th:placeholder="#{signup.placeholder.noOfFamilyEarningPerson}" value="" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" class="form-control" th:placeholder="#{signup.placeholder.lastname}" value="" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control"  minlength="11" maxlength="11" th:placeholder="#{signup.placeholder.phone}"  value="" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" th:placeholder="#{signup.placeholder.permanentAddress}"  value="" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" th:placeholder="#{signup.placeholder.noOfFamilyMember}" value="" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" th:placeholder="#{signup.placeholder.familyMonthlyIncome}" value="" />
+								</div>
+								<input type="submit" class="btnRegister"  th:value="#{signup.btn.register.label}"/>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<span th:insert="/commons/commonResources :: common-js"></span>  
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#profile-tab").click(function(){
+			$("#home-tab").removeClass("active");
+			$("#profile-tab").addClass("active");
+	 	});
+
+		$("#home-tab").click(function(){
+			$("#profile-tab").removeClass("active");
+			$("#home-tab").addClass("active");
+		});
+	});
+</script>
+</body>
+</html>
